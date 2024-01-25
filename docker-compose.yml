@@ -7,5 +7,5 @@ services:
     ports:
       - "5432:5432"
     enviroment:
-      POSTGRES_USER: "UserName"
-      POSTGRES_PASSWORD: "Password"
+      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD: "admin"
