@@ -4,17 +4,16 @@ import jakarta.persistence.*;
 
 import java.util.ArrayList;
 
-public class Follow {
+public class Comment {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     long id;
+    @Column(name = "post_id")
+    long post_id;
     @Column(name = "member_id")
-    String member_id;
-    @Column(name = "count")
-    String count;
+    long member_id;
+    @Column(name = "body")
+    String body;
 
-    @Column(name = "user_id_list")
-    @ElementCollection
-    ArrayList<Long> member_id_list;
 }
