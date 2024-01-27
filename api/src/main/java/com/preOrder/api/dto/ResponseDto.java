@@ -1,0 +1,34 @@
+package com.preOrder.api.dto;
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+
+@Getter
+@AllArgsConstructor
+public class ResponseDto<T> {
+    private Boolean success;
+    private T data;
+    private Error error;
+
+    public ResponseDto(boolean b, T data, Object o) {
+    }
+
+    public static <T> ResponseDto<T> success(T data) {
+        return new ResponseDto<>(true,data,null);
+    }
+
+    public static <T> ResponseDto<T> fail(String code, String message) {
+        return new ResponseDto<>(false,null,new Error(code,message));
+    }
+
+    @Getter
+    @AllArgsConstructor
+    static class Error {
+        private String code;
+        private String message;
+
+        public Error(String code, String message) {
+        }
+    }
+
+}

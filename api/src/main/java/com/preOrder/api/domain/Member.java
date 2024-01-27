@@ -4,7 +4,13 @@ import jakarta.persistence.*;
 
 import java.util.ArrayList;
 
+import lombok.*;
 @Entity
+@Builder
+@Setter
+@Getter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Member {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
