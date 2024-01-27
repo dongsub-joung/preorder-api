@@ -3,6 +3,7 @@ package com.preOrder.api.service;
 
 import com.preOrder.api.domain.Member;
 import com.preOrder.api.repository.MemberRepository;
+import com.preOrder.api.utils.Hash;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -15,7 +16,7 @@ public class Memberservice {
         Member member = memberRepository.findByMemberId(_id)
                 .orElseThrow(() -> new NullPointerException("Member not found for ID: "));
 
-        String sha256Hash = hash.generateSHA256(_pw.trim());
+        String sha256Hash = Hash.generateSHA256(_pw.trim());
 
         _id= _id.trim();
         if (member.getMemberId().equals(_id) && member.getHashedPw().equals(sha256Hash)){
@@ -26,7 +27,7 @@ public class Memberservice {
     }
 
     public String hashing(String pw){
-        return hash.generateSHA256(pw);
+        return Hash.generateSHA256(pw);
     }
 
     public boolean joining(String id, String hashedPw){

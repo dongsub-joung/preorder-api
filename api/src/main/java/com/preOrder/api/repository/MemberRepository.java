@@ -8,4 +8,5 @@ import java.util.Optional;
 
 public interface MemberRepository extends JpaRepository<Member, Long> {
     Optional<Member> findById(long member_id);
+    ArrayList<Long> findAllByPost_Ids(long post_ids);
 }
