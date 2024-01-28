@@ -9,17 +9,17 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class Memberservice {
+public class MemberService {
     private final MemberRepository memberRepository;
     public boolean progressLogin(String _id, String _pw){
 
-        Member member = memberRepository.findByMemberId(_id)
+        Member member = memberRepository.findByName(_id)
                 .orElseThrow(() -> new NullPointerException("Member not found for ID: "));
 
         String sha256Hash = Hash.generateSHA256(_pw.trim());
 
         _id= _id.trim();
-        if (member.getMemberId().equals(_id) && member.getHashedPw().equals(sha256Hash)){
+        if (member.getName().equals(_id) && member.getHashed_pw().equals(sha256Hash)){
             return true;
         }
 

@@ -32,4 +32,9 @@ public class Member {
     @Column(name = "post_ids")
     @ElementCollection
     ArrayList<Long> post_ids;
+
+    public Member(String name, String hashed_pw) {
+        this.name = name;
+        this.hashed_pw = hashed_pw;
+    }
 }
