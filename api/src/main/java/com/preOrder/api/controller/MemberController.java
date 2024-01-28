@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 public class MemberController {
     private final MemberService memberService;
+    
     private boolean loginSuccessful= false;
+
     @PostMapping(value = "/api/login/{_id}/{_pw}")
     public ResponseDto<?> login(@PathVariable String _id
             , @PathVariable String _pw
@@ -21,10 +23,6 @@ public class MemberController {
             , HttpServletRequest httpServletRequest)
     {
         loginSuccessful= memberService.progressLogin(_id, _pw);
-
-        Cookie cookie= new Cookie("UserId", _id);
-        cookie.setMaxAge(24 * 30 * 60 * 60 * 1000);
-        httpServletResponse.addCookie(cookie);
 
         if (loginSuccessful) {
             // If login is successful, create a response with a success message

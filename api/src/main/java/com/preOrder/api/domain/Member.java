@@ -31,7 +31,7 @@ public class Member {
     String member_description;
     @Column(name = "post_ids")
     @ElementCollection
-    ArrayList<Long> post_ids;
+    ArrayList<Long> postIds;
 
     public Member(String name, String hashed_pw) {
         this.name = name;
