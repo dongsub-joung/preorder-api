@@ -11,34 +11,53 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class MemberService {
     private final MemberRepository memberRepository;
-    public boolean progressLogin(String _id, String _pw){
 
-        Member member = memberRepository.findByName(_id)
-                .orElseThrow(() -> new NullPointerException("Member not found for ID: "));
 
-        String sha256Hash = Hash.generateSHA256(_pw.trim());
 
-        _id= _id.trim();
-        if (member.getName().equals(_id) && member.getHashed_pw().equals(sha256Hash)){
-            return true;
-        }
-
-        return false;
-    }
-
-    public String hashing(String pw){
-        return Hash.generateSHA256(pw);
-    }
-
-    public boolean joining(String id, String hashedPw){
-        var member= new Member(id, hashedPw);
-
-        try{
+    //    이름, 프로필 이미지, 인사말을 업데이트 할 수 있다.
+    public boolean changeName(long id, String name){
+        try {
+            var member= memberRepository.findById(id).orElseThrow();
+            member.setName(name);
             memberRepository.save(member);
-            return true;
         }catch (Exception e){
-            e.printStackTrace();
-            return false;
+            System.err.println(e + "can't set name");
         }
+        return true;
+    }
+
+    public boolean changeProfileImg(long id, String url){
+        try {
+            var member= memberRepository.findById(id).orElseThrow();
+            member.setProfile_img_url(url);
+            memberRepository.save(member);
+        }catch (Exception e){
+            System.err.println(e + "can't set image");
+        }
+        return true;
+    }
+
+    public boolean changeDescription(long id, String desc){
+        try {
+            var member= memberRepository.findById(id).orElseThrow();
+            member.setMember_description(desc);
+            memberRepository.save(member);
+        }catch (Exception e){
+            System.err.println(e + "can't set desc");
+        }
+        return true;
+    }
+
+    //    비밀번호를 업데이트 할 수 있다.
+    public boolean changePassword(long id, String pw){
+        try {
+            var member= memberRepository.findById(id).orElseThrow();
+            var hashed_pw= Hash.generateSHA256(pw);
+            member.setHashed_pw(hashed_pw);
+            memberRepository.save(member);
+        }catch (Exception e){
+            System.err.println(e + "can't set password");
+        }
+        return true;
     }
 }

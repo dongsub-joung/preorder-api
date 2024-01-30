@@ -1,10 +1,8 @@
 package com.preOrder.api.domain;
 
 import jakarta.persistence.*;
-
-import java.util.ArrayList;
-
 import lombok.*;
+
 @Entity
 @Builder
 @Setter
@@ -21,17 +19,14 @@ public class Member {
     String hashed_pw;
     @Column(name = "hashed_ph")
     String hashed_ph;
-    @Column(name = "hashed_email")
-    String hashed_email;
+    @Column(name = "email")
+    String email;
     @Column(name = "address")
     String address;
     @Column(name = "profile_img_url")
     String profile_img_url;
     @Column(name = "member_description")
     String member_description;
-    @Column(name = "post_ids")
-    @ElementCollection
-    ArrayList<Long> postIds;
 
     public Member(String name, String hashed_pw) {
         this.name = name;
