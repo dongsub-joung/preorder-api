@@ -12,8 +12,6 @@ import org.springframework.stereotype.Service;
 public class MemberService {
     private final MemberRepository memberRepository;
 
-
-
     //    이름, 프로필 이미지, 인사말을 업데이트 할 수 있다.
     public boolean changeName(long id, String name){
         try {
@@ -22,6 +20,7 @@ public class MemberService {
             memberRepository.save(member);
         }catch (Exception e){
             System.err.println(e + "can't set name");
+            return false;
         }
         return true;
     }
@@ -33,6 +32,7 @@ public class MemberService {
             memberRepository.save(member);
         }catch (Exception e){
             System.err.println(e + "can't set image");
+            return false;
         }
         return true;
     }
@@ -40,10 +40,11 @@ public class MemberService {
     public boolean changeDescription(long id, String desc){
         try {
             var member= memberRepository.findById(id).orElseThrow();
-            member.setMember_description(desc);
+            member.setMemberDescription(desc);
             memberRepository.save(member);
         }catch (Exception e){
             System.err.println(e + "can't set desc");
+            return false;
         }
         return true;
     }
@@ -53,10 +54,11 @@ public class MemberService {
         try {
             var member= memberRepository.findById(id).orElseThrow();
             var hashed_pw= Hash.generateSHA256(pw);
-            member.setHashed_pw(hashed_pw);
+            member.setHashedPw(hashed_pw);
             memberRepository.save(member);
         }catch (Exception e){
             System.err.println(e + "can't set password");
+            return false;
         }
         return true;
     }

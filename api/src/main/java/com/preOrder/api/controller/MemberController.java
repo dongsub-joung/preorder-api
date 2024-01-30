@@ -32,7 +32,7 @@ public class MemberController {
 
 
 //    이름, 프로필 이미지, 인사말을 업데이트 할 수 있다.
-    @GetMapping(value = "/api/member/name")
+    @PostMapping(value = "/api/member/name")
     public ResponseDto<?> changeName(@RequestBody String name,
                                             HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
         boolean flag= false;
@@ -45,7 +45,7 @@ public class MemberController {
         return ResponseDto.fail("name service", Err.ERR_MSG);
     }
 
-    @GetMapping(value = "/api/member/img")
+    @PostMapping(value = "/api/member/img")
     public ResponseDto<?> changeProfileImg(@RequestBody String img_url,
             HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
         boolean flag= false;
@@ -58,7 +58,7 @@ public class MemberController {
         return ResponseDto.fail("img service", Err.ERR_MSG);
     }
 
-    @GetMapping(value = "/api/member/desc")
+    @PostMapping(value = "/api/member/desc")
     public ResponseDto<?> changeDescription(@RequestBody String desc,
                                            HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
         boolean flag= false;
@@ -73,7 +73,7 @@ public class MemberController {
 
 
     //    비밀번호를 업데이트 할 수 있다.
-    @GetMapping(value = "/api/member/password")
+    @PostMapping(value = "/api/member/password")
     public ResponseDto<?> changePassword(@RequestBody String pw,
                                             HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
         boolean flag= false;

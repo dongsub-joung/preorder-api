@@ -16,9 +16,9 @@ public class Member {
     @Column(name = "name")
     String name;
     @Column(name = "hashed_pw")
-    String hashed_pw;
+    String hashedPw;
     @Column(name = "hashed_ph")
-    String hashed_ph;
+    String hashedPh;
     @Column(name = "email")
     String email;
     @Column(name = "address")
@@ -26,10 +26,10 @@ public class Member {
     @Column(name = "profile_img_url")
     String profile_img_url;
     @Column(name = "member_description")
-    String member_description;
+    String memberDescription;
 
     public Member(String name, String hashed_pw) {
         this.name = name;
-        this.hashed_pw = hashed_pw;
+        this.hashedPw = hashed_pw;
     }
 }

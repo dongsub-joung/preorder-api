@@ -29,7 +29,7 @@ public class Post {
     String body;
 
     @Column(name = "author_id")
-    long author_id;
+    long authorId;
 
     @Column(name = "createdAt")
     @CreatedDate
@@ -37,4 +37,14 @@ public class Post {
     @JsonSerialize(using = LocalDateSerializer.class)
     @JsonDeserialize(using = LocalDateDeserializer.class)
     LocalDateTime createdAt;
+
+    public Post(String title, String body){
+        this.title= title;
+        this.body= body;
+    }
+    public Post(String title, String body, long authorId){
+        this.title= title;
+        this.body= body;
+        this.authorId= authorId;
+    }
 }
