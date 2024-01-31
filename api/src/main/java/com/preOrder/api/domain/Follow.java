@@ -15,7 +15,7 @@ public class Follow {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     long id;
     @Column(name = "memberId")
-    String memberId;
+    long memberId;
     @Column(name = "followingUser")
     long followingUser;
 }

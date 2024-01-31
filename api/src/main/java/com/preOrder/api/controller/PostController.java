@@ -24,8 +24,8 @@ public class PostController {
         var author_id= httpServletRequest.getRequestId();
         var flag= postSerivce.createPost(title, body, author_id);
         if (flag)
-            return ResponseDto.success("Done" + Err.POST_CREATE);
-        return ResponseDto.fail(Err.POST_CREATE, Err.ERR_MSG);
+            return ResponseDto.success("Done" + Err.CREATE_ERR);
+        return ResponseDto.fail(Err.CREATE_ERR, Err.ERR_MSG);
     }
 
     @GetMapping("/api/post/{post_id}")
@@ -34,7 +34,7 @@ public class PostController {
         var flag= postSerivce.deletePost(post_id);
 
         if (flag)
-            return ResponseDto.success("Done - " + Err.POST_DEL);
+            return ResponseDto.success("Done - " + Err.DEL_ERR);
         return ResponseDto.fail("Getting post", Err.ERR_MSG);
     }
 
@@ -51,7 +51,7 @@ public class PostController {
         var flag= postSerivce.updatePost(oldPost, newPost);
 
         if (flag)
-            return ResponseDto.success("Done - " + Err.POST_UPDATE);
+            return ResponseDto.success("Done - " + Err.UPDATE_ERR);
         return ResponseDto.fail("Update post", Err.ERR_MSG);
     }
 

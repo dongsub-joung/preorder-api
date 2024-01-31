@@ -19,7 +19,7 @@ public class PostSerivce {
         try {
             return postRepository.findAll(Sort.by(Sort.Direction.DESC, "createdAt"));
         }catch (Exception e){
-            System.err.println(e + Err.POST_GET);
+            System.err.println(e + Err.GET_ERR);
         }
         return null;
     }
@@ -37,7 +37,7 @@ public class PostSerivce {
         try {
             return postRepository.findById(Long.parseLong(post_id)).orElseThrow();
         }catch (Exception e){
-            System.err.println(e + Err.POST_GET);
+            System.err.println(e + Err.GET_ERR);
         }
         return null;
     }
@@ -48,7 +48,7 @@ public class PostSerivce {
         try {
             postRepository.save(post);
         }catch (Exception e){
-            System.err.println(e + Err.POST_CREATE);
+            System.err.println(e + Err.CREATE_ERR);
             return false;
         }
         return true;
@@ -58,7 +58,7 @@ public class PostSerivce {
         try {
             postRepository.deleteById(Long.parseLong(post_id));
         }catch (Exception e){
-            System.err.println(e + Err.POST_DEL);
+            System.err.println(e + Err.DEL_ERR);
             return false;
         }
         return true;
@@ -69,7 +69,7 @@ public class PostSerivce {
             postRepository.deleteById(oldPost.getId());
             postRepository.save(newPost);
         }catch (Exception e){
-            System.err.println(e + Err.POST_UPDATE);
+            System.err.println(e + Err.UPDATE_ERR);
             return false;
         }
         return true;

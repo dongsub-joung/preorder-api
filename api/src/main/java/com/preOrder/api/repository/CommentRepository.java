@@ -7,6 +7,6 @@
 //import java.util.Optional;
 //
 //public interface CommentRepository extends JpaRepository<Comment, Long> {
-//    Optional<ArrayList<Comment>> findAllByPostId(Long post_id);
-//    Optional<ArrayList<Comment>> findAllByMemberId(Long member_id);
+//    Optional<ArrayList<Comment>> findAllByPostId(Long postId);
+//    Optional<ArrayList<Comment>> findAllByMemberId(Long memberId);
 //}

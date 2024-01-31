@@ -5,10 +5,10 @@ public class Err{
   public final static String ERR_MSG= "Something Wrong"; 
 
   // Post CRUD
-  public final static String POST_CREATE= "create post";
-  public final static String POST_DEL= "Delete post";
-  public final static String POST_UPDATE= "Update post";
-  public final static String POST_GET= "Get post";
+  public final static String CREATE_ERR = "create err";
+  public final static String DEL_ERR = "Delete err";
+  public final static String UPDATE_ERR = "Update err";
+  public final static String GET_ERR = "Get err";
 
-
+  // Follow CURD
 }

@@ -2,7 +2,6 @@ package com.preOrder.api.domain;
 
 import jakarta.persistence.*;
 
-import java.util.ArrayList;
 import lombok.*;
 @Entity
 @Builder
@@ -10,13 +9,12 @@ import lombok.*;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Like {
-
+public class LikeFunction {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     long id;
-    @Column(name = "postId")
-    long postId;
-    @Column(name = "likedUserIdList")
-    long likedUserIdList;
+    @Column(name = "postNumber")
+    long postNumber;
+    @Column(name = "likedUser")
+    long likedUser;
 }
