@@ -16,6 +16,12 @@ import java.util.ArrayList;
 public class FollowService {
     private final FollowRepository followRepository;
     private final MemberRepository memberRepository;
+
+    public boolean createFollower(String memberId, String followingUserId){
+        
+        return true;
+    }
+
     public FollowingMemberResponseDto getMyFollowInfo(String memberId){
         try {
             var data= followRepository.findAllByMemberId(Long.parseLong(memberId))
