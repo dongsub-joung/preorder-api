@@ -1,5 +1,6 @@
 package com.preOrder.api.service;
 
+import com.preOrder.api.domain.Follow;
 import com.preOrder.api.dto.response.FollowResponseDto;
 import com.preOrder.api.dto.response.FollowerResponseDto;
 import com.preOrder.api.dto.response.FollowingMemberResponseDto;
@@ -18,7 +19,23 @@ public class FollowService {
     private final MemberRepository memberRepository;
 
     public boolean createFollower(String memberId, String followingUserId){
-        
+        Follow follow= new Follow(Long.parseLong(memberId), Long.parseLong(followingUserId));
+        try {
+            followRepository.save(follow);
+        }catch (Exception e){
+            System.err.println(e + Err.CREATE_ERR);
+            return false;
+        }
+        return true;
+    }
+
+    public boolean deleteFollower(String followId){
+        try {
+            followRepository.deleteById(Long.parseLong(followId));
+        }catch (Exception e){
+            System.err.println(e + Err.CREATE_ERR);
+            return false;
+        }
         return true;
     }
 
