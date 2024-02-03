@@ -4,6 +4,7 @@ import com.preOrder.api.domain.Post;
 import com.preOrder.api.dto.ResponseDto;
 import com.preOrder.api.service.PostService;
 import com.preOrder.api.utils.Err;
+import com.preOrder.api.utils.PassResponse;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
@@ -15,16 +16,16 @@ public class PostController {
     private final PostService postService;
 
 //    Post CRUD
-    @PostMapping(value = "/api/post/create")
+    @PostMapping(value = "/api/post/create/{title}")
     public ResponseDto<?> createPost(
-            @RequestBody String title
-            , @RequestBody String body
+            @PathVariable("title") String title
+            , @RequestParam String body
             , HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
 
         var author_id= httpServletRequest.getRequestId();
         var flag= postService.createPost(title, body, author_id);
         if (flag)
-            return ResponseDto.success("Done" + Err.CREATE_ERR);
+            return ResponseDto.success(PassResponse.CREATE_DONE);
         return ResponseDto.fail(Err.CREATE_ERR, Err.ERR_MSG);
     }
 
