@@ -18,4 +18,10 @@ public class Comment {
     long memberId;
     @Column(name = "body")
     String body;
+
+    public Comment(long postId, long memberId, String body) {
+        this.postId = postId;
+        this.memberId = memberId;
+        this.body = body;
+    }
 }

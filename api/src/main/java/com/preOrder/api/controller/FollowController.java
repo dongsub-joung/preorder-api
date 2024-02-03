@@ -77,7 +77,7 @@ public class FollowController {
     }
 
     @GetMapping("/api/followers/{memberId}/{followingUserId}")
-    public ResponseDto<?> getPosts(@PathVariable String memberId
+    public ResponseDto<?> getFollowerInfo(@PathVariable String memberId
             , @PathVariable String followingUserId
             ,HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse){
 

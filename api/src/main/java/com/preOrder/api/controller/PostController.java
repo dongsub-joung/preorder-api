@@ -2,7 +2,7 @@ package com.preOrder.api.controller;
 
 import com.preOrder.api.domain.Post;
 import com.preOrder.api.dto.ResponseDto;
-import com.preOrder.api.service.PostSerivce;
+import com.preOrder.api.service.PostService;
 import com.preOrder.api.utils.Err;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequiredArgsConstructor
 public class PostController {
-    private final PostSerivce postSerivce;
+    private final PostService postService;
 
 //    Post CRUD
     @PostMapping(value = "/api/post/create")
@@ -22,7 +22,7 @@ public class PostController {
             , HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
 
         var author_id= httpServletRequest.getRequestId();
-        var flag= postSerivce.createPost(title, body, author_id);
+        var flag= postService.createPost(title, body, author_id);
         if (flag)
             return ResponseDto.success("Done" + Err.CREATE_ERR);
         return ResponseDto.fail(Err.CREATE_ERR, Err.ERR_MSG);
@@ -31,7 +31,7 @@ public class PostController {
     @GetMapping("/api/post/{post_id}")
     public ResponseDto<?> deletePosts(@PathVariable String post_id,
                                    HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse){
-        var flag= postSerivce.deletePost(post_id);
+        var flag= postService.deletePost(post_id);
 
         if (flag)
             return ResponseDto.success("Done - " + Err.DEL_ERR);
@@ -45,10 +45,10 @@ public class PostController {
             , @RequestBody String body
             , HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse){
 
-        Post oldPost= postSerivce.getPost(id);
+        Post oldPost= postService.getPost(id);
         Post newPost= new Post(title, body);
 
-        var flag= postSerivce.updatePost(oldPost, newPost);
+        var flag= postService.updatePost(oldPost, newPost);
 
         if (flag)
             return ResponseDto.success("Done - " + Err.UPDATE_ERR);
@@ -58,7 +58,7 @@ public class PostController {
     @GetMapping("/api/posts/{author_id}")
     public ResponseDto<?> getPosts(@PathVariable String author_id,
                                    HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse){
-        var data= postSerivce.getPosts(author_id);
+        var data= postService.getPosts(author_id);
 
         if (!data.isEmpty())
             return ResponseDto.success(data);
@@ -67,7 +67,7 @@ public class PostController {
 
     @GetMapping("/api/posts")
     public ResponseDto<?> listUpPosts(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse){
-        var data= postSerivce.listUpPosts();
+        var data= postService.listUpPosts();
 
         if (!data.isEmpty())
             return ResponseDto.success(data);

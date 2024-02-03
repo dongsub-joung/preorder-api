@@ -12,7 +12,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class PostSerivce {
+public class PostService {
     private final PostRepository postRepository;
 
     public List<Post> listUpPosts(){
