@@ -35,11 +35,22 @@ public class LikedMemberService {
         return true;
     }
 
-    //    @todo gets
+    //    @todo id token
     public LikeMemberDto getLikeOneMember(String id, String likedMemberId) {
         try {
             var like= likeMemberRepository.findByAuthorMemberIdAndMemberLikedId
                     (Long.parseLong(id), Long.parseLong(likedMemberId)).orElseThrow();
+            return new LikeMemberDto(like);
+        }catch (Exception e){
+            System.err.println(e + Err.GET_ERR);
+        }
+        return null;
+    }
+
+    public LikeMemberDto getLikesOneMember(String id) {
+        try {
+            var like= likeMemberRepository.findAllByAuthorMemberId
+                    (Long.parseLong(id)).orElseThrow();
             return new LikeMemberDto(like);
         }catch (Exception e){
             System.err.println(e + Err.GET_ERR);

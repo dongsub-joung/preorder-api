@@ -43,4 +43,15 @@ public class LikedPostService {
         }
         return null;
     }
+
+    public LikePostDto getLikesOnePost(String id) {
+        try {
+            var like= likePostRepository.findAllByAuthorMemberId
+                    (Long.parseLong(id)).orElseThrow();
+            return new LikePostDto(like);
+        }catch (Exception e){
+            System.err.println(e + Err.GET_ERR);
+        }
+        return null;
+    }
 }

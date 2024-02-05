@@ -3,6 +3,7 @@ package com.preOrder.api.service;
 import com.preOrder.api.domain.LikeComment;
 import com.preOrder.api.dto.response.LikeCommentDto;
 import com.preOrder.api.dto.response.LikeMemberDto;
+import com.preOrder.api.dto.response.LikePostDto;
 import com.preOrder.api.repository.LikeCommentRepository;
 import com.preOrder.api.utils.Err;
 import lombok.RequiredArgsConstructor;
@@ -37,6 +38,17 @@ public class LikedCommentService {
         try {
             var like= likeCommentRepository.findByAuthorMemberIdAndCommentLikedId
                     (Long.parseLong(id), Long.parseLong(likedMemberId)).orElseThrow();
+            return new LikeCommentDto(like);
+        }catch (Exception e){
+            System.err.println(e + Err.GET_ERR);
+        }
+        return null;
+    }
+
+    public LikeCommentDto getLikesOnComment(String id) {
+        try {
+            var like= likeCommentRepository.findAllByAuthorMemberId
+                    (Long.parseLong(id)).orElseThrow();
             return new LikeCommentDto(like);
         }catch (Exception e){
             System.err.println(e + Err.GET_ERR);
