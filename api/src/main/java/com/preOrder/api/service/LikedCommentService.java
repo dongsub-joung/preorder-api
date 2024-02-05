@@ -2,6 +2,7 @@ package com.preOrder.api.service;
 
 import com.preOrder.api.domain.LikeComment;
 import com.preOrder.api.dto.response.LikeCommentDto;
+import com.preOrder.api.dto.response.LikeMemberDto;
 import com.preOrder.api.repository.LikeCommentRepository;
 import com.preOrder.api.utils.Err;
 import lombok.RequiredArgsConstructor;
@@ -21,10 +22,25 @@ public class LikedCommentService {
         }
         return true;
     }
-    public LikeCommentDto getLikeOneComment(String commentId) {
-        return null;
-    }
-    public boolean deleteCommentLike(String userCommentNumber, String likedCommentId) {
+    public boolean deleteCommentLike(String id, String likedCommentId) {
+        try {
+            var like= likeCommentRepository.findByAuthorMemberIdAndCommentLikedId
+                    (Long.parseLong(id), Long.parseLong(likedCommentId)).orElseThrow();
+            likeCommentRepository.delete(like);
+        }catch (Exception e){
+            System.err.println(e + Err.DEL_ERR);
+            return false;
+        }
         return true;
+    }
+    public LikeCommentDto getLikeOneComment(String id, String likedMemberId) {
+        try {
+            var like= likeCommentRepository.findByAuthorMemberIdAndCommentLikedId
+                    (Long.parseLong(id), Long.parseLong(likedMemberId)).orElseThrow();
+            return new LikeCommentDto(like);
+        }catch (Exception e){
+            System.err.println(e + Err.GET_ERR);
+        }
+        return null;
     }
 }

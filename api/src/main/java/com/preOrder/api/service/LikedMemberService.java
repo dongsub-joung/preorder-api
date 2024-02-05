@@ -1,7 +1,7 @@
 package com.preOrder.api.service;
 
 import com.preOrder.api.domain.LikeMember;
-import com.preOrder.api.dto.response.LikeUserDto;
+import com.preOrder.api.dto.response.LikeMemberDto;
 import com.preOrder.api.repository.LikeMemberRepository;
 import com.preOrder.api.utils.Err;
 import lombok.RequiredArgsConstructor;
@@ -23,18 +23,27 @@ public class LikedMemberService {
         return true;
     }
 
-    public boolean deleteMemberLike(String userLikeNumber, String likedMemberId) {
+    public boolean deleteMemberLike(String id, String likedMemberId) {
         try {
-            var like= likeMemberRepository.findByUserLikeNumber(Long.parseLong(userLikeNumber)).orElseThrow();
-            likeCommentRepository.delete(like);
+            var like= likeMemberRepository.findByAuthorMemberIdAndMemberLikedId
+                    (Long.parseLong(id), Long.parseLong(likedMemberId)).orElseThrow();
+            likeMemberRepository.delete(like);
+        }catch (Exception e){
+            System.err.println(e + Err.DEL_ERR);
+            return false;
         }
         return true;
     }
 
     //    @todo gets
-    public LikeUserDto getLikeOneMember(String memberId) {
+    public LikeMemberDto getLikeOneMember(String id, String likedMemberId) {
+        try {
+            var like= likeMemberRepository.findByAuthorMemberIdAndMemberLikedId
+                    (Long.parseLong(id), Long.parseLong(likedMemberId)).orElseThrow();
+            return new LikeMemberDto(like);
+        }catch (Exception e){
+            System.err.println(e + Err.GET_ERR);
+        }
         return null;
     }
-
-
 }

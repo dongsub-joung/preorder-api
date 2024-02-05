@@ -1,6 +1,7 @@
 package com.preOrder.api.service;
 
 import com.preOrder.api.domain.LikePost;
+import com.preOrder.api.dto.response.LikeMemberDto;
 import com.preOrder.api.dto.response.LikePostDto;
 import com.preOrder.api.repository.LikePostRepository;
 import com.preOrder.api.utils.Err;
@@ -21,10 +22,25 @@ public class LikedPostService {
         }
         return true;
     }
-    public boolean deletePostLike(String userPostNumber, String likedPostId) {
+    public boolean deletePostLike(String id, String likedPostId) {
+        try {
+            var like= likePostRepository.findByAuthorMemberIdAndPostLikedId
+                    (Long.parseLong(id), Long.parseLong(likedPostId)).orElseThrow();
+            likePostRepository.delete(like);
+        }catch (Exception e){
+            System.err.println(e + Err.DEL_ERR);
+            return false;
+        }
         return true;
     }
-    public LikePostDto getLikeOnPost(String postId) {
+    public LikePostDto getLikeOnPost( String id, String likedMemberId) {
+        try {
+            var like= likePostRepository.findByAuthorMemberIdAndPostLikedId
+                    (Long.parseLong(id), Long.parseLong(likedMemberId)).orElseThrow();
+            return new LikePostDto(like);
+        }catch (Exception e){
+            System.err.println(e + Err.GET_ERR);
+        }
         return null;
     }
 }

@@ -7,4 +7,5 @@ import java.util.ArrayList;
 import java.util.Optional;
 
 public interface LikeMemberRepository extends JpaRepository<LikeMember, Long> {
+    Optional<LikeMember> findByAuthorMemberIdAndMemberLikedId(long id, long liked);
 }
