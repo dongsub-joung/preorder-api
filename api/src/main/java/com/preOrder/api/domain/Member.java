@@ -1,5 +1,6 @@
 package com.preOrder.api.domain;
 
+import com.preOrder.api.dto.request.MemberCreateReqDto;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -28,8 +29,13 @@ public class Member {
     @Column(name = "member_description")
     String memberDescription;
 
-    public Member(String name, String hashed_pw) {
-        this.name = name;
-        this.hashedPw = hashed_pw;
+    public Member(MemberCreateReqDto createReqDto) {
+        this.name = createReqDto.getName();
+        this.hashedPw = createReqDto.getHashedPw();
+        this.hashedPh = createReqDto.getHashedPh();
+        this.email = createReqDto.getEmail();
+        this.address = createReqDto.getAddress();
+        this.profile_img_url = createReqDto.getProfileImgUrl();
+        this.memberDescription = createReqDto.getDescription();
     }
 }

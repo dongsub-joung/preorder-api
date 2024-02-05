@@ -16,13 +16,13 @@ public class PostController {
     private final PostService postService;
 
 //    Post CRUD
-    @PostMapping(value = "/api/post/create/{title}")
-    public ResponseDto<?> createPost(
-            @PathVariable("title") String title
+    @PostMapping(value = "/api/post/{author_id}/create/{title}")
+    public ResponseDto<?> createPost(@PathVariable String author_id
+            , @PathVariable String title
             , @RequestParam String body
             , HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
 
-        var author_id= httpServletRequest.getRequestId();
+//        var author_id= httpServletRequest.getRequestId();
         var flag= postService.createPost(title, body, author_id);
         if (flag)
             return ResponseDto.success(PassResponse.CREATE_DONE);
@@ -35,25 +35,25 @@ public class PostController {
         var flag= postService.deletePost(post_id);
 
         if (flag)
-            return ResponseDto.success("Done - " + Err.DEL_ERR);
-        return ResponseDto.fail("Getting post", Err.ERR_MSG);
+            return ResponseDto.success(PassResponse.DEL_DONE);
+        return ResponseDto.fail(Err.DEL_ERR, Err.ERR_MSG);
     }
 
-    @PutMapping("/api/post/update")
+    @PutMapping("/api/post/{author_id}/update")
     public ResponseDto<?> updatePost(
-            @RequestBody String id
-            , @RequestBody String title
-            , @RequestBody String body
+            @PathVariable String author_id
+            , @RequestParam String title
+            , @RequestParam String body
             , HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse){
 
-        Post oldPost= postService.getPost(id);
+        Post oldPost= postService.getPost(author_id);
         Post newPost= new Post(title, body);
 
         var flag= postService.updatePost(oldPost, newPost);
 
         if (flag)
-            return ResponseDto.success("Done - " + Err.UPDATE_ERR);
-        return ResponseDto.fail("Update post", Err.ERR_MSG);
+            return ResponseDto.success(PassResponse.UPDATE_DONE);
+        return ResponseDto.fail(Err.UPDATE_ERR, Err.ERR_MSG);
     }
 
     @GetMapping("/api/posts/{author_id}")
@@ -63,7 +63,7 @@ public class PostController {
 
         if (!data.isEmpty())
             return ResponseDto.success(data);
-        return ResponseDto.fail("Getting post", Err.ERR_MSG);
+        return ResponseDto.fail(Err.GET_ERR, Err.ERR_MSG);
     }
 
     @GetMapping("/api/posts")
@@ -72,6 +72,6 @@ public class PostController {
 
         if (!data.isEmpty())
             return ResponseDto.success(data);
-        return ResponseDto.fail("ListUp post", Err.ERR_MSG);
+        return ResponseDto.fail(Err.GET_ERR, Err.ERR_MSG);
     }
 }

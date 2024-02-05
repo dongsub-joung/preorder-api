@@ -2,7 +2,9 @@ package com.preOrder.api.service;
 
 
 import com.preOrder.api.domain.Member;
+import com.preOrder.api.dto.request.MemberCreateReqDto;
 import com.preOrder.api.repository.MemberRepository;
+import com.preOrder.api.utils.Err;
 import com.preOrder.api.utils.Hash;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -58,6 +60,16 @@ public class MemberService {
             memberRepository.save(member);
         }catch (Exception e){
             System.err.println(e + "can't set password");
+            return false;
+        }
+        return true;
+    }
+
+    public boolean createMember(String name, String hashedPw, String hashedPh, String email, String address, String profileImgUrl, String description) {
+        try {
+            memberRepository.save(new Member(new MemberCreateReqDto(name, hashedPw,hashedPh,email,address, profileImgUrl, description)));
+        }catch (Exception e){
+            System.err.println(e + Err.CREATE_ERR);
             return false;
         }
         return true;
