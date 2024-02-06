@@ -4,9 +4,12 @@ package com.preOrder.api.service;
 import com.preOrder.api.domain.Member;
 import com.preOrder.api.dto.request.MemberCreateReqDto;
 import com.preOrder.api.repository.MemberRepository;
+import com.preOrder.api.security.UserDetailsImpl;
 import com.preOrder.api.utils.Err;
 import com.preOrder.api.utils.Hash;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 @Service
