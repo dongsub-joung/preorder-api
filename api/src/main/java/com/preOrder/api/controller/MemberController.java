@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.*;
 public class MemberController {
     private final MemberService memberService;
 
-    @PostMapping(value = "/api/member/create")
+    @PostMapping(value = "/api/member/join")
     public ResponseDto<?> createMember(@RequestParam String name
             , @RequestParam String hashed_pw
             , @RequestParam String hashed_ph
@@ -33,23 +33,19 @@ public class MemberController {
         return ResponseDto.fail(Err.CREATE_ERR, Err.ERR_MSG);
     }
 
-//    Loing - Join
-//    @PostMapping(value = "/api/login/")
-//    public ResponseDto<?> login(@RequestBody String _id , @RequestBody String _pw
-//            , HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
-//        return ResponseDto.success("Done- login");
-//    }
-//
-//    @PostMapping(value = "/api/join/")
-//    public ResponseDto<?> join(@RequestBody String _id, @RequestBody String _pw
-//            , HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, ) {
-//
-//        return ResponseDto.success("Done- Join");
-//    }
+    @PostMapping(value = "/api/member/login")
+    public ResponseDto<?> login(@RequestParam String _id , @RequestParam String _pw
+            , HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
+//        boolean flag= memberService
+
+        if (flag)
+            return ResponseDto.success("Done- login");
+        return ResponseDto.fail("login err", Err.ERR_MSG);
+    }
 
 
     //    이름, 프로필 이미지, 인사말을 업데이트 할 수 있다.
-    @PostMapping(value = "/api/member/name")
+    @PostMapping(value = "/api/member/update/name")
     public ResponseDto<?> changeName(@RequestParam String name,
                                      HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
         boolean flag= false;
@@ -62,7 +58,7 @@ public class MemberController {
         return ResponseDto.fail("name service", Err.ERR_MSG);
     }
 
-    @PostMapping(value = "/api/member/img")
+    @PostMapping(value = "/api/member/update/img")
     public ResponseDto<?> changeProfileImg(@RequestParam String img_url,
                                            HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
         boolean flag= false;
@@ -75,7 +71,7 @@ public class MemberController {
         return ResponseDto.fail("img service", Err.ERR_MSG);
     }
 
-    @PostMapping(value = "/api/member/desc")
+    @PostMapping(value = "/api/member/update/desc")
     public ResponseDto<?> changeDescription(@RequestParam String desc,
                                             HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
         boolean flag= false;
@@ -90,7 +86,7 @@ public class MemberController {
 
 
     //    비밀번호를 업데이트 할 수 있다.
-    @PostMapping(value = "/api/member/password")
+    @PostMapping(value = "/api/member/update/password")
     public ResponseDto<?> changePassword(@RequestParam String pw,
                                          HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
         boolean flag= false;

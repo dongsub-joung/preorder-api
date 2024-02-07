@@ -77,4 +77,8 @@ public class MemberService {
         }
         return true;
     }
+
+    public boolean login(){
+
+    }
 }
